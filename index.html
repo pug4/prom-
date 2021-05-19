@@ -36,12 +36,63 @@ body, html {height: 100%}
 #grad2{
   background-image: linear-gradient(to bottom right, #614385, #516395);
 }
+@import url("https://fonts.googleapis.com/css?family=Finger+Paint");
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  background-color: #ffcc33;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+p {
+  margin: 0px;
+  padding: 0px;
+}
+
+#canvas {
+  margin: 0px;
+  padding: 0px;
+}
+
+.container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-family: "Finger Paint", cursive;
+  font-size: calc(25px + 4.3vw);
+  color: #ff3333;
+  text-align: center;
+  z-index: -1;
+}
+
+#information {
+  font-size: calc(15px + 0.5vw);
+  -webkit-animation: 1s linear 3s forwards hideinfo;
+  animation: 1s linear 3s forwards hideinfo;
+}
+
+@-webkit-keyframes hideinfo {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 </style>
 
 
 <body id="grad2">
   <canvas height='1' id='confetti' width='1'></canvas>
-  <div class="template shine"></div>
   <audio autoplay>
     <source src="My Shot.mp3" type="audio/mpeg">
 
@@ -52,31 +103,37 @@ body, html {height: 100%}
     </div>
     <p>this is your new frog james</p> -->
   </div>
-  <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
-    <div class="w3-display-topleft w3-padding-large w3-xlarge">
+  <div class="bgimg classdisplay-container classanimate-opacity classtext-white">
+    <div class="classdisplay-topleft classpadding-large classxlarge">
       <!-- <img src="http://i.stack.imgur.com/SBv4T.gif" alt="this slowpoke moves"  width="250" /> -->
     </div>
-    <div id = "grad1" class="w3-display-middle warning"><center>
-      <h1 class="w3-jumbo w3-animate-top" style="color: #00203f;;">Will you be the boba</h1>
-      <h1 class="w3-jumbo w3-animate-top" style="color: #00203f;;">to my milk tea and</h1>
-      <h1 class="w3-jumbo w3-animate-top" style="color: #00203f;;">go to prom</h1>
-      <h1 class="w3-jumbo w3-animate-top" style="color: #00203f;;">with me?</h1>
-      <hr class="w3-border-grey" style="margin:auto;width:40%">
-      <p class="w3-large w3-center" style="color: rgb(104, 103, 163);">From Jayu❤️</p>
+    <div id = "grad1" class="classdisplay-middle warning"><center>
+      <h1 class="classjumbo classanimate-top" style="color: #00203f;;">Will you be the ✨boba✨</h1>
+      <h1 class="classjumbo classanimate-top" style="color: #00203f;;">to my ✨milk tea✨ and</h1>
+      <h1 class="classjumbo classanimate-top" style="color: #00203f;;">go to prom</h1>
+      <h1 class="classjumbo classanimate-top" style="color: #00203f;;">with me?</h1>
+      <hr class="classborder-grey" style="margin:auto;width:40%">
+      <p class="classlarge classcenter" style="color: rgb(104, 103, 163);">From Jayu❤️</p>
       </center>
     </div>
-    <div class="w3-display-bottomleft w3-padding-large">
+    <div class="classdisplay-bottomleft classpadding-large">
     </div>
-    <button class="open-button" onclick="openForm()">Reasons why you should go to prom with me</button>
+    <button class="open-button" onclick="openForm()">Reasons why you should go to prom with me...</button>
 
     <div class="form-popup" id="myForm">
       <form action="/action_page.php" class="form-container">
-        <h3 style = "color: black;">im jayu i dont think u need any more reasons <3</h3>
+        <h3 style = "color: black;">im jayu i dont think u need any more reasons but here are a few<3:</h3>
+        <ol style = "color: black;"> 
+          <li>I am super funny</li>
+          <li>I am tall</li>
+          <li>We're gonna match</li>
+        </ol>
         <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
       </form>
   </div>
 </body>
 <script>
+  
   //Make the DIV element draggagle:
   dragElement(document.getElementById("mydiv"));
   
@@ -550,5 +607,49 @@ $(function() {
     createStar();
   }
 });
+// CANVAS SETUP + VARIABLES
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+// Emoji array created by Github user anthonydelgado: https://gist.github.com/anthonydelgado/528d1fab9242067348c0ac25f873d7f0
+var emojiArray = ["✌", "😂", "😝", "😁", "😱", "👉", "🙌", "🍻", "🔥", "🌈", "☀", "🎈", "🌹", "💄", "🎀", "⚽", "🎾", "🏁", "😡", "👿", "🐻", "🐶", "🐬", "🐟", "🍀", "👀", "🚗", "🍎", "💝", "💙", "👌", "❤", "😍", "😉", "😓", "😳", "💪", "💩", "🍸", "🔑", "💖", "🌟", "🎉", "🌺", "🎶", "👠", "🏈", "⚾", "🏆", "👽", "💀", "🐵", "🐮", "🐩", "🐎", "💣", "👃", "👂", "🍓", "💘", "💜", "👊", "💋", "😘", "😜", "😵", "🙏", "👋", "🚽", "💃", "💎", "🚀", "🌙", "🎁", "⛄", "🌊", "⛵", "🏀", "🎱", "💰", "👶", "👸", "🐰", "🐷", "🐍", "🐫", "🔫", "👄", "🚲", "🍉", "💛", "💚"]
+var xPositions = [window.innerWidth / 2, window.innerWidth / 4, window.innerWidth / 4 * 3, window.innerWidth / 8, window.innerWidth / 8 * 7];
+var yPositions = [0, 0, 0, 0, 0];
+var arrayOfCurrentEmojis = [];
+
+// CORE EMOJI FUNCTION
+var emojiDrops = function() {
+     ctx.font = '30px serif';
+     for (var i = 0; i < xPositions.length; i++) {
+          arrayOfCurrentEmojis.push(emojiArray[Math.floor((Math.random() * emojiArray.length - 1) + 1)]);
+          ctx.fillText(arrayOfCurrentEmojis[i], xPositions[i], yPositions[i]);
+
+          // this will make every emoji move in a random speed, so it looks more realistic
+          yPositions[i] += Math.floor((Math.random() * 5) + 2);
+
+          // if any emoji reaches the end, it will return to the top
+          for (var k = 0; k < yPositions.length; k++) {
+               if (yPositions[k] >= window.innerHeight) {
+                    yPositions[k] = 0;
+               }
+          }
+     }
+};
+
+// INIT
+function draw() {
+  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+     emojiDrops();
+     window.requestAnimationFrame(draw);
+}
+draw();
+
+// MOUSE EVENTS
+document.getElementById("canvas").addEventListener("click", function(event) {
+     xPositions.push(event.pageX);
+     yPositions.push(event.pageY);
+}, false);
+
   </script>
 </html>
